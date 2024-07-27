@@ -7,6 +7,12 @@ I am looking for an interesting way to get myself out of the house and out to th
 - Machine Learning
 - And offensive cybersecurity
 
+# Goal:
+I want to create a system which is capable of scanning wireless networks and assessing them for vulnerabilities, and then sending that information back to me in a way that is easy to understand and act upon
+
+## Target Audience:
+This project is intended for people who are interested in cybersecurity, networking, and machine learning. It is intended to be a fun and interesting way to get out of the house and explore the world around you while still being able to learn and grow in your field of interest, I am the target audience for this project haha.
+
 
 ## Idea:
 To do this I intend to build my own alternative to the [Pwnagotchi](https://pwnagotchi.ai/) reinforcement learning based Wi-Fi pwning platform. I want to create a system which is capable of using the same reinforcement learning techniques to learn about the networks it is scanning and then use that information to make decisions about how to proceed with the network assessments 
@@ -26,9 +32,8 @@ Ideally, each time I bring the device back to the same location, it would be abl
 
 We will build these using 
 
-### Hardware
-
-#### Mobile Device
+### Mobile Device
+This is the device which will be brought out into the field with you to scan networks and assess them
 **[Libre Computer](https://libre.computer)**
 Model: [Le Potato](https://libre.computer/products/aml-s905x-cc/) 
 specs & configs:
@@ -37,24 +42,53 @@ specs & configs:
     - 1 ethernet
     - 1 mobile power supply
     - Debian as the OS
+    - zsh as the shell
+    - [docker]()
+    - 
     - Python 3.12
-    - PDM python package manager
-**Server Device**
-Simply a more powerful linux device for you to leave behind while you are out and about with the mobile device.
+    - [PDM](https://github.com/pdm-project/pdm) python package manager
 
-### Software
 
 #### Language(s)
-- Python
-    - Keras RL
+- Python v3.12
+    **Libraries**
+    - Keras RL for reinforcement learning, The use of reinforcement learning within this project is in how the mobile device is able to preform detailed and efficient assessments of the environment and it’s current state. We use Keras RL to effectively detect the state of the environment and make the next scan preformed relevant to the environment. Ideally over time as the `mobile device` analyzes more environments it becomes faster and faster at scanning them because of prior experience
+    **Tools**
+    - Scapy for packet manipulation
+    - Custom tools for network discovery (based on python & Keras RL)
     - container based scanning & network assessment
-        - Nmap
-        - Rustscan
+        - Docker for container management, we intend to containerize individual tools and services to allow for easy management and deployment of the tools and services we intend to use, as well as Operational Security (OPSEC) and protecting the operators in addition to giving us the ability to easily update and maintain the tools and services we intend to use
+          - Nmap for service detection once on a network
+          - Rustscan for faster network scanning
+          - Masscan for large scale network scanning
+
         - MAC address randomization
         - Write output to Postgres database using:
-            - Sqlalchemy
+            - [Sqlalchemy](https://www.sqlalchemy.org/) for database management as well as potentially using [advanced alchemy](https://github.com/litestar-org/advanced-alchemy) for advanced database management as well as other DBMSs like [DuckDB](https://duckdb.org/)
             - Geoalchemy for geo-location
-    - python telegram bot for the UI handlers as simple chats should be more than enough to convey relevant information about the state of the system and agents running within it
+    - [python telegram bot v21.4](https://docs.python-telegram-bot.org/en/v21.4/) for the UI. Works by sending updates to user(s) as simple chats from a [Telegram Bot](https://core.telegram.org/bots/api) should be more than enough to convey relevant information about the state of the system and agents running within it
+
+
+
+
+#### Server Device
+The `server device` is a more powerful linux device for you to leave behind while you are out and about with the `mobile device`.
+
+It mainly functions as a [Litestar ASGI API Server](https://litestar.dev) which will be able to receive information from the `mobile device` & process it for storage or later analysis. It can even send updates about the information it is getting from the `mobile device` to the `telegram bot` for you to view
+If configured properly the `mobile device` should be able to send information back to the `server device` which will then be able to send that information to the `telegram bot` for you to view
+
+One of the other main use cases of the server, in addition to information & data management/processing, is simply acting as the "muscle", allowing us to offload the heavy lifting required for effective use of tools like [HashCat](), or other password cracking tools, to the server device rather than the mobile device
+
+Ideally the server could be one single Debain based device or a k8s cluster using [microk8s](https://microk8s.io/) or [k3s](https://k3s.io/) for easy management and deployment of the server device
+
+We intend to have the server be able to support multiple `mobile devices` at once, allowing for multiple `mobile devices` to be out in the field at once and all sending information back to the same server device
+
+
+
+---
+---
+
+## Goals & Random Thoughts
 
 when assessing networks, the ultimate goal is to identify vulnerabilities in systems and return known information about said vulnerabilities to the user via the telegram bot
 
