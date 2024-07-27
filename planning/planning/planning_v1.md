@@ -44,7 +44,7 @@ specs & configs:
     - Debian as the OS
     - zsh as the shell
     - [docker]()
-    - 
+    - SQlite for local caching of data
     - Python 3.12
     - [PDM](https://github.com/pdm-project/pdm) python package manager
 
@@ -83,7 +83,13 @@ Ideally the server could be one single Debain based device or a k8s cluster usin
 
 We intend to have the server be able to support multiple `mobile devices` at once, allowing for multiple `mobile devices` to be out in the field at once and all sending information back to the same server device
 
-
+##### Server Tech Stack
+- [Litestar ASGI API Server](https://litestar.dev)
+- [Postgres](https://www.postgresql.org/) for database management
+- [Sqlalchemy](https://www.sqlalchemy.org/) for database management as well as potentially using [advanced alchemy](
+- [DuckDB](https://duckdb.org/) for advanced database management as well as other DBMSs like [DuckDB](https://duckdb.org/)
+- [Geoalchemy](https://geoalchemy-2.readthedocs.io/en/latest/) for geo-location
+- [python telegram bot v21.4](https://docs.python-telegram-bot.org/en/v21.4/) for the UI. Works by sending updates to user(s) as simple chats from a [Telegram Bot](https://core.telegram.org/bots/api) should be more than enough to convey relevant information about the state of the system and agents running within it
 
 ---
 ---
