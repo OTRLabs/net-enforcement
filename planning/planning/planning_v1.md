@@ -1,4 +1,5 @@
 
+# Introduction 
 I am looking for an interesting way to get myself out of the house and out to the real world while still being able to integrate my interests of
 
 - programming
@@ -6,24 +7,44 @@ I am looking for an interesting way to get myself out of the house and out to th
 - Machine Learning
 - And offensive cybersecurity
 
-To do this I intend to build my own alternative to the Pwnagotchi reinforcement learning based Wi-Fi pwning platform 
 
-My long term goal is to create a system that is module driven similar to the metasploit framework 
+## Idea:
+To do this I intend to build my own alternative to the [Pwnagotchi](https://pwnagotchi.ai/) reinforcement learning based Wi-Fi pwning platform. I want to create a system which is capable of using the same reinforcement learning techniques to learn about the networks it is scanning and then use that information to make decisions about how to proceed with the network assessments 
 
-The idea would be the Modules would be ways that the agent based system can interact with a variety of advanced tools we provide it via the form of python functions.
+My longer term goal is to create a system that is `module driven` similar to the `metasploit framework` by `Rapid7` 
+The idea would be the Modules would be ways that the agent based system can interact with a variety of advanced `tools`, `services`, & `actions` which we grant the agents access to in the form of `python functions` which the agents can call when they deem it a valid time to do so.
 
-This would look like Pwnagachi  combined with langchain style tools allowing for advanced research, environment management and assessment, as well as advanced reasoning and understanding when making decisions about how to move forward in the network assessments
+
+This would look like `Pwnagachi` combined with [langchain](https://langchain.com) style tools allowing for advanced research, environment management and assessment, as well as advanced reasoning and understanding when making decisions about how to move forward in the network assessments
 
 We are essentially looking to create a device designed for the `war-driving` equivalent of what spear phishing is to spam phishing attacks 
 
 Ideally, each time I bring the device back to the same location, it would be able to recognize that and pick up where it last left off in terms of wireless network assessments
 
+
+## Development Plan / Outline
+
 We will build these using 
 
-- Libre Computer Le Potato 2GB RAM
+### Hardware
+
+#### Mobile Device
+**[Libre Computer](https://libre.computer)**
+Model: [Le Potato](https://libre.computer/products/aml-s905x-cc/) 
+specs & configs:
+    - 2GB RAM
     - 2 Wi-Fi adapters
     - 1 ethernet
-    - 1 power supply
+    - 1 mobile power supply
+    - Debian as the OS
+    - Python 3.12
+    - PDM python package manager
+**Server Device**
+Simply a more powerful linux device for you to leave behind while you are out and about with the mobile device.
+
+### Software
+
+#### Language(s)
 - Python
     - Keras RL
     - container based scanning & network assessment
