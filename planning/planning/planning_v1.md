@@ -30,7 +30,10 @@ Ideally, each time I bring the device back to the same location, it would be abl
 
 ## Development Plan / Outline
 
-We will build these using 
+Development will be broken down into 3 main parts
+1. Mobile Device
+2. Server Device
+3. Shared Libraries & Tools
 
 ### Mobile Device
 This is the device which will be brought out into the field with you to scan networks and assess them
@@ -71,7 +74,7 @@ specs & configs:
 
 
 
-#### Server Device
+### Server Device
 The `server device` is a more powerful linux device for you to leave behind while you are out and about with the `mobile device`.
 
 It mainly functions as a [Litestar ASGI API Server](https://litestar.dev) which will be able to receive information from the `mobile device` & process it for storage or later analysis. It can even send updates about the information it is getting from the `mobile device` to the `telegram bot` for you to view
@@ -83,13 +86,62 @@ Ideally the server could be one single Debain based device or a k8s cluster usin
 
 We intend to have the server be able to support multiple `mobile devices` at once, allowing for multiple `mobile devices` to be out in the field at once and all sending information back to the same server device
 
-##### Server Tech Stack
+#### Server Tech Stack
 - [Litestar ASGI API Server](https://litestar.dev)
 - [Postgres](https://www.postgresql.org/) for database management
 - [Sqlalchemy](https://www.sqlalchemy.org/) for database management as well as potentially using [advanced alchemy](
 - [DuckDB](https://duckdb.org/) for advanced database management as well as other DBMSs like [DuckDB](https://duckdb.org/)
 - [Geoalchemy](https://geoalchemy-2.readthedocs.io/en/latest/) for geo-location
 - [python telegram bot v21.4](https://docs.python-telegram-bot.org/en/v21.4/) for the UI. Works by sending updates to user(s) as simple chats from a [Telegram Bot](https://core.telegram.org/bots/api) should be more than enough to convey relevant information about the state of the system and agents running within it
+
+
+
+### Shared Libraries & Tools
+To ensure ultimate consistency when communicating across the `mobile device` and the `server device` we will be using a shared library of tools and services which will be used by both devices to ensure that the information being sent back and forth is consistent and reliable.
+
+This will also allow us to easily update and maintain the tools and services we intend to use across both devices
+
+- Pydantic for data validation
+- JSON
+- 
+
+
+
+
+### Reinforcement Learning
+
+Diving more into the reinforcement learning and how we will use Keras RL, we intend to break this system down to work in the following way:
+
+**environment**
+
+This is the 2.4GHz & 5GHz networks we can detect with the tools we are using at the time
+
+**Environment Objects**
+
+Objects in the environment include networks which contain hosts, which are running services
+
+**Action**
+Actions are the things the system can do to interact with the environment.
+For this project that will include things like:
+- nmap scans. Basically gathering data on the networks. Hosts or services to detect vulnerabilities 
+- search engine queries. To gather more information about the networks, hosts, or services
+  - this could include
+  - Shodan
+  - Censys
+  - google
+  - brave
+  - bing
+  - if it offers an API we can use it
+- brute force attacks. To attempt to gain access to the networks, hosts, or services
+- etc
+**rewards**
+
+Rewards will be given at various stages but primarily when:
+
+- the system gains access to a new network
+- Identifies hosts on the network
+- Identifies a service on those hosts
+- the system is able to accurately detect a vulnerability as this is the ultimate goal
 
 ---
 ---
